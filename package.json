@@ -7,10 +7,10 @@
       "npm": "2.12.x"
     },
   "author": {
-    "name": "Ryan X Charles",
-    "email": "ryan@bitpay.com"
+    "name": "DigiByte Team",
+    "email": "info@digibyte.io"
   },
-  "repository": "git://github.com/bitpay/insight.git",
+  "repository": "git@github.com:DigiByte-Core/insight.git",
   "contributors": [
     {
       "name": "Matias Alejo Garcia",
@@ -34,9 +34,9 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/bitpay/insight/issues"
+    "url": "https://github.com/DigiByte-Core/insight/issues"
   },
-  "homepage": "https://github.com/bitpay/insight",
+  "homepage": "https://github.com/DigiByte-Core/insight.git",
   "license": "MIT",
   "keywords": [
     "insight",
