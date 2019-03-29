@@ -3,6 +3,10 @@
 //Setting up route
 angular.module('insight').config(function($routeProvider) {
   $routeProvider.
+    when('/asset/:assetId/:txId/:index', {
+      templateUrl: '/views/assetTransaction.html',
+      title: 'DigiAsset '
+    }).
     when('/block/:blockHash', {
       templateUrl: '/views/block.html',
       title: 'Digibyte Block '

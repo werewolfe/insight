@@ -88,6 +88,13 @@
                 <span translate>Double spent attempt detected. From tx:</span> 
                 <a href="/tx/{{<vin class=""></vin>doubleSpentTxID}}">{{vin.doubleSpentTxID}},{{vin.doubleSpentIndex}}</a>
               </div>
+              <div class="pull-right btc-value" ng-show="vin.hasAssets">
+                {{vin.amount }}               
+              </div>
+
+              <div class="ellipsis" ng-show="vin.hasAssets">
+                <img width="32" ng-src="{{vin.assetIcon}}"/><a href="asset/{{vin.assetId}}/{{tx.txid}}/{{vin.index}}" style="margin-left: 5px">{{vin.assetName ? vin.assetName : vin.assetId}}</a>
+              </div>
             </div> <!-- END OF PANEL BODY -->
           </div> <!-- END OF PANEL-DEFAULT -->
           <div class="small" style="margin-left:0.7em; word-wrap:break-word;" data-ng-class="{true: 'v_highlight', false: ''}[from_vin == true && v_index == vin.n]" >
@@ -128,21 +135,28 @@
         <div data-ng-repeat="vout in tx.voutSimple| startFrom:currentOutNoExpanded*sizeOutNoExpanded | limitTo:sizeOutNoExpanded">
           <div class="transaction-vin-vout panel panel-default">
             <div class="panel-body">
-              <div class="pull-right btc-value" data-ng-hide="vout.op_return" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
+              <div class="pull-right btc-value" data-ng-class="{'text-success': $root.currentAddr == vout.addr}">
                 {{$root.currency.getConvertion(vout.value) || vout.value + ' DGB' }}
                 <span class="text-danger" data-ng-show="vout.isSpent" tooltip="Output is spent" tooltip-placement="left">(S)</span>
                 <span class="text-success" data-ng-show="!vout.isSpent"  tooltip="Output is unspent" tooltip-placement="left">(U)</span>
               </div>
 
-              <div class="pull-right" data-ng-show="vout.op_return">
-                (OP_RETURN)
-              </div>
-
               <div class="ellipsis">
-                <span data-ng-show="vout.notAddr && !vout.op_return">{{vout.addr}}</span>
-                <span data-ng-show="vout.op_return">{{vout.op_returnString}}</span>
+                <span data-ng-show="vout.notAddr">{{vout.addr}}</span>
                 <span class="text-muted" title="Current Digibyte Address" data-ng-show="address == $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{vout.addr}}</span>
                 <a href="/address/{{address}}"  data-ng-show="!vout.notAddr && address != $root.currentAddr" data-ng-repeat="address in vout.addr.split(',')">{{address}}</a>
+              </div>
+
+              <div ng-show="vout.hasAssets" style="margin-top: 10px">
+                <span stlye="font-size: 20px">Output contains Following DigiAssets</span>
+              </div>
+              <div class="pull-right btc-value" ng-show="vout.hasAssets">
+                {{vout.amount }}               
+              </div>
+              <div class="ellipsis" ng-show="vout.hasAssets">
+                <img width="32" src="/img/icons/lock.png" ng-show="{{vout.isLocked}}"/>
+                <img width="32" src="/img/icons/unlock.png" ng-show="{{!vout.isLocked}}"/>
+                <a href="/asset/{{vout.assetId}}/{{tx.txid}}/{{vout.index}}" style="margin-left: 5px">{{vout.assetName ? vout.assetName : vout.assetId}}</a>
               </div>
             </div>
           </div>

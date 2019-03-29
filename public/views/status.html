@@ -121,6 +121,7 @@
       <table class="table" data-ng-controller="StatusController" data-ng-init="getStatus('Info')">
         <thead  data-ng-include src="'/views/includes/infoStatus.html'"></thead>
         <tbody>
+          {{info}}
           <tr>
             <td translate>Version</td>
             <td class="text-right">{{info.version}}</td>
@@ -147,7 +148,7 @@
           </tr>
           <tr>
             <td translate>Testnet</td>
-            <td class="text-right">{{info.testnet}}</td>
+            <td class="text-right">{{info.chain === 'test'}}</td>
           </tr>
           <tr>
             <td translate>Proxy setting</td>
