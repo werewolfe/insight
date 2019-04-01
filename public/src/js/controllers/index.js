@@ -109,7 +109,7 @@ angular.module('insight.system').controller('IndexController',
     }
 
     var _getAssetStats = function() {
-      return getMainStats.query(function(resp) {
+      return getMainStats.get(function(resp) {
         $scope.numOfAssets = resp.numOfAssets;
         $scope.numOfDATransactions = resp.numOfDATransactions;
         $scope.numOfHolders = resp.numOfHolders;

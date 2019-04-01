@@ -143,8 +143,24 @@
             <td class="text-right">{{info.connections}}</td>
           </tr>
           <tr>
-           <td translate>Mining Difficulty</td>
-            <td class="text-right">{{info.difficulty}}</td>
+           <td translate>SHA256 Difficulty</td>
+            <td class="text-right">{{info.difficulties.sha256d}}</td>
+          </tr>
+          <tr>
+            <td translate>Scrypt Difficulty</td>
+            <td class="text-right">{{info.difficulties.scrypt}}</td>
+          </tr>
+          <tr>
+            <td translate>Skein Difficulty</td>
+            <td class="text-right">{{info.difficulties.skein}}</td>
+          </tr>
+          <tr>
+            <td translate>Qubit Difficulty</td>
+            <td class="text-right">{{info.difficulties.qubit}}</td>
+          </tr>
+          <tr>
+            <td translate>Odo Difficulty</td>
+            <td class="text-right">{{info.difficulties.odo}}</td>
           </tr>
           <tr>
             <td translate>Testnet</td>
@@ -156,7 +172,7 @@
           </tr>
           <tr>
             <td translate>Info Errors</td>
-            <td class="text-right">{{info.infoErrors}}</td>
+            <td class="text-right">{{info.warnings}}</td>
           </tr>
         </tbody>
       </table>
