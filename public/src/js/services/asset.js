@@ -170,21 +170,7 @@ angular.module('insight.assets')
   })
   .factory('getPopularAssets',
   function($resource) {
-    return $resource(EXPLORER_API_URL + '/getpopularassets', {}, {
-      get: {
-        method: 'GET',
-        interceptor: {
-          response: function (res) {
-            return res.data;
-          },
-          responseError: function (res) {
-            if (res.status === 404) {
-              return res;
-            }
-          }
-        }
-      }
-    });    
+    return $resource(EXPLORER_API_URL + '/getpopularassets');    
   })
   .factory('getMainStats',
   function($resource) {
@@ -206,19 +192,5 @@ angular.module('insight.assets')
   })
   .factory('getAssetTransactions',
   function($resource) {
-    return $resource(EXPLORER_API_URL + '/getdatransactions?limit=5', {}, {
-      get: {
-        method: 'GET',
-        interceptor: {
-          response: function (res) {
-            return res.data;
-          },
-          responseError: function (res) {
-            if (res.status === 404) {
-              return res;
-            }
-          }
-        }
-      }
-    });    
+    return $resource(EXPLORER_API_URL + '/getdatransactions?limit=5');    
   });
