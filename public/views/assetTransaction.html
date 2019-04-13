@@ -1,177 +1,175 @@
 <div data-ng-include src="'/views/includes/connection.html'"></div>
-<section data-ng-controller="AssetsController" ng-init="init()">
-  <div class="container" data-ng-if="!hideSNavbar">
-    <div class="row">
-      <div class="col-xs-9">
-          <div style="line-height: 50px; padding-left: 20px; font-size: 30px; font-weight: 700; letter-spacing: 1px; color: #06c;" id="assetName" title="MyCity">ASSET NAME: {{metadata.assetName}}</div>
-      </div>
-      <div class="col-xs-3">
-        <div class="assetTab" ng-show="{{isLocked}}">
-          <div style="background-color: #e9eeee; width: 67px; height: 67; text-align: center; float: left; border-top-left-radius: 5px; padding-top: 2px;"><img src="/img/icons/lock.png"></div>
-          <div style="float: left; line-height: 54px; padding-left: 15px;">LOCKED ASSET</div>
-        </div>
-        <div class="assetTab" ng-show="{{!isLocked}}">
-          <div style="background-color: #e9eeee; width: 67px; height: 67; text-align: center; float: left; border-top-left-radius: 5px; padding-top: 2px;"><img src="/img/icons/unlock.png"></div>
-          <div style="float: left; line-height: 54px; padding-left: 15px;">UNLOCKED ASSET</div>
-        </div>
+<section data-ng-controller="AssetsController" data-ng-init="init()">
+  <div class="secondary_navbar hidden-xs hidden-sm" scroll data-ng-class="{'hidden': !secondaryNavbar}" data-ng-show="metadata.assetName" data-ng-init="hideSNavbar=0">
+    <div class="container" data-ng-if="!hideSNavbar">
+      <div class="col-md-8 text-left">
+          <h3 translate>Asset</h3> {{asset.assetId}}
+          <span class="btn-copy" clip-copy="metadata.assetName"></span>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-9">
-        <div class="row" style="padding-top: 20px; padding-bottom: 20px;">
-          <div class="col-xs-3 text-center">
-            <div style="width: 170px; height: 170px; border: 2px solid white; border-radius: 5px; background-color: white; display: table-cell; vertical-align: middle;">
-              <img id="assetImage" ng-src="{{logo}}" style="max-height: 168px; max-width: 168px;">
-            </div>
-          </div>
-          <div class="col-xs-9" id="assetDesc" style="font-size: 18px; line-height: 28px;">
-            <h4 style="color: white; font-weight: 600; font-size: 18px;">DESCRIPTION</h4>
-            {{metadata.description}}
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-3" style="padding-top: 20px; padding-bottom: 20px;">
-        <div class="blockInfoItemTop" style="border-top: 2px solid #cbd8d7; border-bottom: 2px solid #cbd8d7;">
-          <label>Issuer</label> <span id="assetIssuer">{{metadata.issuer}}&nbsp;</span>
-        </div>
-        <div class="blockInfoItemTop" style="border-bottom: 2px solid #cbd8d7;">
-          <label>Total Supply</label> <span id="assetTotalSupply">{{totalSupply}}</span>
-        </div>
-        <div class="blockInfoItemTop" style="border-bottom: 2px solid #cbd8d7;">
-          <label># Holders</label> <span id="assetHolders">{{asset.numOfHolders}}</span>
-        </div>
-      </div>   
+    <div class="hide_snavbar">
+      <a href="#" data-ng-click="hideSNavbar=!hideSNavbar">
+        <span data-ng-show="hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-down"></span></span>
+        <span data-ng-show="!hideSNavbar"><span class="text-muted glyphicon glyphicon-chevron-up"></span></span>
+      </a>
     </div>
-    <div class="panel panel-info">
+  </div>
+  <div class="row">
+    <div class="col-md-10">
+        <h1><span translate>Asset</span> <span class="text-muted">{{metadata.assetName}}</span></h1>
+        <h4><span class="text-muted" style="padding-left: 15px; padding-top: 15px">{{metadata.description}}</span></h4>
+    </div>
+    <div class="col-md-2">
+        <img data-ng-src={{logo}} height=128>
+    </div>
+  </div>
+  <div class="text-muted" data-ng-if="!metadata.assetName">
+    <span translate>Loading Asset Information</span> <span class="loader-gif"></span>
+  </div>
+  <div data-ng-if="metadata.assetName">
+    <h2 translate style="margin-top: 5px">Summary</h2>
+    <div class="row" data-ng-hide="!metadata.assetName">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody>
+            <tr>
+              <td><strong translate>Asset ID</strong></td>
+              <td class="ellipsis text-right">{{asset.assetId}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Issuer</strong></td>
+              <td class="ellipsis text-right">{{issueAddress}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Lock Status</strong></td>
+              <td class="ellipsis text-right">
+                <div class="assetTab" ng-show="{{isLocked}}">
+                  <div>
+                    <img src="/img/icons/lock.png" width="32">
+                    LOCKED ASSET
+                  </div>
+                </div>
+                <div class="assetTab" ng-show="{{!isLocked}}">
+                  <div>
+                    <img src="/img/icons/unlock.png" width="32">
+                    UNLOCKED ASSET
+                  </div>
+                </div>                
+              </td>
+            </tr>
+            <tr>
+              <td><strong translate>Total Supply</strong></td>
+              <td class="ellipsis text-right">{{totalSupply}}</td>
+            </tr>
+            <tr>
+              <td><strong>Divisibility</strong></td>
+              <td class="ellipsis text-right">{{asset.divisibility}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Description</strong></td>
+              <td class="ellipsis text-right">{{metadata.description}}</td>
+            </tr>
+            <tr>
+              <td><strong translate># Holders</strong></td>
+              <td class="ellipsis text-right">{{asset.numOfHolders}}</td>
+            </tr>
+            <tr>
+              <td><strong translate># Issuance</strong></td>
+              <td class="ellipsis text-right">{{asset.numOfIssuance}}</td>
+            </tr>
+            <tr>
+              <td><strong translate># Transfers</strong></td>
+              <td class="ellipsis text-right">{{asset.numOfTransfers}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Meta Torrent</strong></td>
+              <td class="ellipsis text-right"><a href="{{torrentLink}}">Magnet</a></td>
+            </tr>
+            <tr>
+              <td><strong translate>utxo</strong></td>
+              <td class="ellipsis text-right">{{asset.someUtxo}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>First Block</strong></td>
+              <td class="ellipsis text-right">{{asset.firstBlock}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <h2 translate>Metadata</h2>
+    <div class="row" data-ng-hide="!metadata.assetName">
+      <div class="col-md-12">
+        <table class="table">
+          <tbody ng-repeat="(key, value) in metadata">
+            <tr>
+              <td><strong translate>{{key}}</strong></td>
+              <td class="ellipsis text-right">{{value}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div style="padding-top: 30px">
+      <div class="panel panel-bg">
         <div class="panel-heading">
-          <h3 class="panel-title">SUMMARY</h3>
+          <h3 class="panel-title">Holders</h3>
         </div>
-        <div class="panel-body" style="padding: 10px; background-color: #e3e2dc;">
-          <div class="col-md-6 col-sm-12">
-            <div class="blockInfoItem">
-              <label># Issuance</label> <span id="assetIssuance">{{asset.numOfIssuance}}</span>
-            </div>
-            <div class="blockInfoItem">
-              <label>Divisibility</label> <span id="assetDiv">{{asset.divisibility}}</span>
-            </div>
-            <div class="blockInfoItem">
-              <label>Meta Torrent</label>
-              <span id="assetTorrent"><a href="{{torrentLink}}">Magnet</a></span>
-            </div>
-            <div class="blockInfoItem">
-              <label>utxo</label> <span>{{asset.someUtxo}}</span>
-            </div>
-          </div>
-          <div class="col-md-6 col-sm-12">
-            <div class="blockInfoItem">
-              <label># Transfers</label> <span id="assetTX">{{asset.numOfTransfers}}</span>
-            </div>
-            <div class="blockInfoItem">
-              <label>First Block</label> <span id="assetAge"><a href="block/{{asset.firstBlock}}">{{asset.firstBlock}}</a></span>
-            </div>
-            <div class="blockInfoItem">
-              <label>Asset ID</label> <span>{{asset.assetId}}</span>
-            </div>
-          </div>
-        </div>
-        <div style="font-size: 15px; font-weight: 700; line-height: 40px; height: 40px; padding-left: 25px;" ng-click="expandMetadata()">
-          <a class="collapsed accordion-toggle stoggle" aria-expanded="false" aria-controls="metadataCollapse" style="color: #f60;">METADATA</a>
-        </div>
-        <div style="border-top: 2px solid #c2c1ba;" ng-show="metadataExpanded">
-          <div style="padding: 7px 0; background-color: #e3e2dc;" id="metaFields" ng-repeat="(key, value) in metadata">
-            <div class="metadataItem">
-              <Label>{{key}}</Label>
-              <br>
-              <div class="well">{{value}}</div>
-            </div>
-          </div>
-          <div style="padding: 7px 0; background-color: #e3e2dc;" id="metaURLs">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>Name</th>
-                  <th>URL</th>
-                  <th>Type</th>
-                  <th>Hash</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>icon</td>
-                  <td><div style="max-width: 250px; overflow: auto; height: 35px; white-space:nowrap;">https://s3-us-west-2.amazonaws.com/colu-website/izyefJ5cTo2_Vb57PwHtfsIL.png</div></td>
-                  <td>image/png</td>
-                  <td><div style="max-width: 220px; height: 35px; overflow: auto;white-space:nowrap;">c3f149bf01869716ed213d23cee4f43faf34f768e994057ffe9893a93b4dc7db</div></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
-      <div style="padding-top: 30px">
-        <div class="container">
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">Holders</h3>
-            </div>
-            <div class="panel-body">
-              <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th>Address</th>
-                    <th>Amount</th>
-                  </tr>
-                </thead>
-                <tbody data-ng-repeat="holder in holders">
-                  <tr>
-                    <td><a href="address/{{holder.address}}">{{holder.address}}</a></td>
-                    <td>{{holder.amount}}</td>
-                  </tr>
+        <div class="panel-body" style="background-color: #fff; color: #000">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Address</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody data-ng-repeat="holder in holders">
+              <tr>
+                <td><a href="/address/{{holder.address}}">{{holder.address}}</a></td>
+                <td style="color: #000">{{holder.amount}}</td>
+              </tr>
 
-                </tbody>
-              </table>
-            </div>
-          </div>
+            </tbody>
+          </table>
         </div>
       </div>
-      <div style="padding-top: 30px">
-          <div class="container">
-            <div class="panel panel-primary">
-              <div class="panel-heading">
-                <h3 class="panel-title">Transfer Transactions</h3>
-              </div>
-              <div class="panel-body">
-                <table class="table table-striped">
-                  <tbody data-ng-repeat="holder in transfers">
-                    <tr>
-                      <td><a href="address/{{holder.address}}">{{holder.address}}</a></td>
-                    </tr>
-  
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
+    </div>
+    <div style="padding-top: 30px">
+      <div class="panel panel-bg">
+        <div class="panel-heading">
+          <h3 class="panel-title">Transfer Transactions</h3>
         </div>
-        <div style="padding-top: 30px">
-            <div class="container">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h3 class="panel-title">Issue Transactions</h3>
-                </div>
-                <div class="panel-body">
-                  <table class="table table-striped">
-                    <tbody data-ng-repeat="holder in issuances">
-                      <tr>
-                        <td><a href="tx/{{holder.txid}}">{{holder.txid}}</a></td>
-                        <td>Sent <span style="font-weight: bold">{{$root.currency.getConvertion(holder.totalSent / 100000000)}}</span></td>
-                        <td>Asset Sent <span style="font-weight: bold">{{holder.totalAssetSent}}</span></td>
-                      </tr>
-    
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="panel-body" style="background-color: #fff; color: #000">
+          <table class="table table-striped">
+            <tbody data-ng-repeat="holder in transfers">
+              <tr>
+                <td><a href="/address/{{holder.address}}">{{holder.address}}</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div style="padding-top: 30px">
+      <div class="panel panel-bg">
+        <div class="panel-heading">
+          <h3 class="panel-title">Issue Transactions</h3>
+        </div>
+        <div class="panel-body" style="background-color: #fff; color: #000">
+          <table class="table table-striped">
+            <tbody data-ng-repeat="holder in issuances">
+              <tr>
+                <td><a href="/tx/{{holder.txid}}">{{holder.txid}}</a></td>
+                <td>Sent <span style="font-weight: bold">{{$root.currency.getConvertion(holder.totalSent / 100000000)}}</span></td>
+                <td>Asset Sent <span style="font-weight: bold">{{holder.totalAssetSent}}</span></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
+

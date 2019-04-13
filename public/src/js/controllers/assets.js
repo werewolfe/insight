@@ -4,7 +4,6 @@ angular.module('insight.assets').controller('AssetsController',
   function($scope, $rootScope, $routeParams, $location, Global, assetInfo, assetInfoWithTxes, assetMetadata ) {
 
     $scope.metadataExpanded = false;
-    console.log('losllsls');
 
     $scope.init = function() {
       assetInfo.get({ assetId: $routeParams.assetId }, function(resp){
@@ -15,7 +14,6 @@ angular.module('insight.assets').controller('AssetsController',
         $scope.totalSupply += $scope.asset.totalSupply / divisors;
         $scope.totalSupply = $scope.totalSupply.toFixed($scope.asset.divisibility)
         $scope.isLocked = $scope.asset.lockStatus;
-        console.log(resp);
         assetInfoWithTxes.get({ assetId: $routeParams.assetId }, function(data) {
           $scope.holders = data.holders;
           $scope.issuances = data.issuances.map(function(issuance) {
@@ -36,17 +34,18 @@ angular.module('insight.assets').controller('AssetsController',
           });
           $scope.transfers = data.transfers;
           assetMetadata.get({ assetId: $routeParams.assetId, txid: $routeParams.txId + ':' + $routeParams.index }, function(metadata) {
+            $scope.issueAddress = metadata.issueAddress;
             $scope.metadata = metadata.metadataOfIssuence.data;
             $scope.metaUserData = $scope.metadata.userData;
             $scope.urls = $scope.metadata.urls;
-            console.log($scope.urls);
-            $scope.logo = 'https://i.imgur.com/8hNpVao.png';
-            if ($scope.urls.some(function(url) { url.name === 'icon' })) {
+            if ($scope.urls.some(function(url) { return url.name.toLowerCase() === 'icon'; })) {
               $scope.urls.forEach(function(url) {
                 if (url.name === 'icon') {
                   $scope.logo = url.url;
                 }
               });
+            } else {
+              $scope.logo = 'https://i.imgur.com/8hNpVao.png';
             }
             $scope.torrentLink;
             var assetTorrent;

@@ -24,7 +24,7 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 /* Styling for the ngProgress itself */
 #ngProgress {
-  background-color: #0066cc !important;
+  background-color: #0066CC !important;
   box-shadow: none !important;
   color: #373D42 !important;
   height: 3px !important;
@@ -115,7 +115,7 @@ margin-left: 0;
 .navbar-default .navbar-toggle:hover, .navbar-default .navbar-toggle:focus {background-color: #373D42;}
 
 .navbar-default {
-  background-color: #0066cc;
+  background-color: #0066CC;
   margin: 0;
   border: 0;
 }
@@ -128,7 +128,7 @@ margin-left: 0;
 }
 
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus {
-  background-color: #0066cc;
+  background-color: #0066CC;
   color: #fff;
 }
 
@@ -201,14 +201,14 @@ margin-left: 0;
 #search { color: #06e; }
 
 #search::-webkit-input-placeholder {
-  color: #0066cc;
+  color: #0066CC;
   font-family: 'Ubuntu', sans-serif;
   font-style: italic;
   font-weight: 100;
 }
 
 #search::-moz-placeholder {
-  color: #0066cc;
+  color: #0066CC;
   font-family: 'Ubuntu', sans-serif;
   font-weight: 100;
 }
@@ -316,8 +316,8 @@ margin-left: 0;
   border-radius: 2px;
 }
 .btn-primary {
-  background-color: #0066cc;
-  border: 2px solid #0066cc;
+  background-color: #0066CC;
+  border: 2px solid #0066CC;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active,
@@ -363,7 +363,7 @@ margin-left: 0;
 }
 
 .txvalues-primary {
-  background-color: #0066cc;
+  background-color: #0066CC;
 }
 
 .txvalues-default {
@@ -386,7 +386,7 @@ margin-left: 0;
   font-size: 14px;
   font-weight: normal;
 }
-.progress-bar-info { background-color: #0066cc; }
+.progress-bar-info { background-color: #0066CC; }
 
 /* Set the fixed height of the footer here */
 #footer {
@@ -580,6 +580,12 @@ margin-left: 0;
 .panel-body {
   padding: 0.7em;
   word-wrap: break-word;
+}
+.panel-bg { 
+  background-color: #0066CC;
+  color: #000;
+  color: #F4FBE8;
+  font-family: Ubuntu,sans-serif;
 }
 
 /* Index */
@@ -826,7 +832,7 @@ a.v_highlight_more {
   }
   .txvalues-primary {
     background: none;
-    color: #0066cc;
+    color: #0066CC;
   }
   .txvalues-default {
     background: none;

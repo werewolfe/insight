@@ -170,7 +170,7 @@ angular.module('insight.assets')
   })
   .factory('getPopularAssets',
   function($resource) {
-    return $resource(EXPLORER_API_URL + '/getpopularassets');    
+    return $resource(EXPLORER_API_URL + '/getpopularassets');   
   })
   .factory('getMainStats',
   function($resource) {
