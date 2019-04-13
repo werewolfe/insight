@@ -581,6 +581,12 @@ margin-left: 0;
   padding: 0.7em;
   word-wrap: break-word;
 }
+.panel-bg { 
+  background-color: #012351;
+  color: #000;
+  color: #F4FBE8;
+  font-family: Ubuntu,sans-serif;
+}
 
 /* Index */
 #home .btn-more {
