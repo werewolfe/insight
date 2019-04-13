@@ -14,36 +14,48 @@
       </a>
     </div>
   </div>
-  <h1><span translate>Asset</span> <span class="text-muted">{{metadata.assetName}}</span></h1>
+  <div class="row">
+    <div class="col-md-10">
+        <h1><span translate>Asset</span> <span class="text-muted">{{metadata.assetName}}</span></h1>
+        <h4><span class="text-muted" style="padding-left: 15px; padding-top: 15px">{{metadata.description}}</span></h4>
+    </div>
+    <div class="col-md-2">
+        <img data-ng-src={{logo}} height=128>
+    </div>
+  </div>
   <div class="text-muted" data-ng-if="!metadata.assetName">
     <span translate>Loading Asset Information</span> <span class="loader-gif"></span>
   </div>
   <div data-ng-if="metadata.assetName">
-    <div class="col-md-11">
-      <div class="well well-sm ellipsis" style="margin-top: 25px">
-        <strong translate>Asset Id</strong> 
-        <span class="text-muted">{{asset.assetId}}</span>
-        <span class="btn-copy" clip-copy="asset.assetId"></span>
-      </div>
-    </div>
-    <div class="col-md-1 text-center">
-      <div class="assetTab" ng-show="{{!isLocked}}">
-        <div><img src="/img/icons/lock.png"></div>
-        <div>LOCKED ASSET</div>
-      </div>
-      <div class="assetTab" ng-show="{{isLocked}}">
-        <div><img src="/img/icons/unlock.png"></div>
-        <div>UNLOCKED ASSET</div>
-      </div>
-    </div>
-    <h2 translate>Summary</h2>
+    <h2 translate style="margin-top: 5px">Summary</h2>
     <div class="row" data-ng-hide="!metadata.assetName">
       <div class="col-md-12">
         <table class="table">
           <tbody>
             <tr>
+              <td><strong translate>Asset ID</strong></td>
+              <td class="ellipsis text-right">{{asset.assetId}}</td>
+            </tr>
+            <tr>
               <td><strong translate>Issuer</strong></td>
               <td class="ellipsis text-right">{{issueAddress}}</td>
+            </tr>
+            <tr>
+              <td><strong translate>Lock Status</strong></td>
+              <td class="ellipsis text-right">
+                <div class="assetTab" ng-show="{{isLocked}}">
+                  <div>
+                    <img src="/img/icons/lock.png" width="32">
+                    LOCKED ASSET
+                  </div>
+                </div>
+                <div class="assetTab" ng-show="{{!isLocked}}">
+                  <div>
+                    <img src="/img/icons/unlock.png" width="32">
+                    UNLOCKED ASSET
+                  </div>
+                </div>                
+              </td>
             </tr>
             <tr>
               <td><strong translate>Total Supply</strong></td>
