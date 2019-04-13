@@ -149,6 +149,7 @@ angular.module('insight.system').controller('IndexController',
             txid: a.txid,
             time: a.time,
             block: a.blockheight,
+            blockhash: a.blockhash,
             totalAsset: totalAsset
           };
         });
