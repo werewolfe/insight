@@ -1,0 +1,103 @@
+<div class="line-bot row" data-ng-hide="!tx">
+  <div class="col-xs-7 col-md-8">
+    <div class="ellipsis">
+      <a class="btn-expand" href="#" title="Show/Hide items details" data-ng-click="itemsExpanded = !itemsExpanded">
+        <span class="glyphicon glyphicon-plus-sign" data-ng-class="{'glyphicon-minus-sign': itemsExpanded}"></span>
+      </a>
+      <a href="/tx/{{tx.txid}}">{{tx.txid}}</a>
+      <span class="btn-copy" clip-copy="tx.txid"></span>
+    </div>
+  </div>
+</div>
+<div class="row line-mid">
+  <div class="col-md-5">
+    <div class="row">
+
+      <!-- <<< Simple view -->
+      <div data-ng-if="!itemsExpanded" data-ng-init="currentInNoExpanded=0; sizeInNoExpanded=5">
+        <div class="panel panel-default" data-ng-repeat="vin in tx.vin" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
+          <div class="panel-body transaction-vin-vout" data-ng-show="vin.amount">
+            <div class="pull-right btc-value">
+              {{vin.amount}}
+            </div>
+            <div class="ellipsis">
+              <a href="/address/{{vin.addr}}" >{{vin.addr}}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <<< Full view -->
+      <div data-ng-if="itemsExpanded" data-ng-init="currentInExpanded=0; sizeInExpanded=(from_vin) ? tx.vin.length : 5; fromVinCollapsed=(from_vin)">
+        <div data-ng-repeat="vin in tx.vin">
+          <div class="panel panel-default transaction-vin-vout" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
+            <div class="panel-body">
+              <div class="pull-right btc-value">
+                {{vin.amount}}
+              </div>
+              <div class="ellipsis">
+                <a class="glyphicon glyphicon-chevron-right" href="/tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
+                <a href="/address/{{vin.addr}}" >{{vin.addr}}</a>
+              </div>
+              <div class="pull-right btc-value" ng-show="vin.hasAssets">
+                {{vin.amount}}               
+              </div>
+            </div> <!-- END OF PANEL BODY -->
+          </div> <!-- END OF PANEL-DEFAULT -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-1 col-xs-12">
+    <div class="hidden-xs hidden-sm text-center">
+      <span class="lead glyphicon glyphicon-chevron-right text-muted"></span>
+    </div>
+    <div class="hidden-md hidden-lg text-center">
+      <span class="lead glyphicon glyphicon-chevron-down text-muted"></span>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="row">
+      <!-- Simple view >>> -->
+      <div data-ng-if="!itemsExpanded" data-ng-init="currentOutNoExpanded=0; sizeOutNoExpanded=5">
+        <div data-ng-repeat="vout in tx.vout"  data-ng-show="vout.amount">
+          <div class="transaction-vin-vout panel panel-default" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
+            <div class="panel-body">
+              <div class="pull-right btc-value" >
+                {{vout.amount }}
+              </div>
+
+              <div class="ellipsis">
+                <a href="/address/{{vout.addr}}" >{{vout.addr}}</a>
+              </div>
+
+              <div ng-show="vout.hasAssets" style="margin-top: 10px">
+                <span stlye="font-size: 20px">Output contains Following DigiAssets</span>
+              </div>
+              <div class="pull-right btc-value" ng-show="vout.hasAssets">
+                {{vout.amount }}               
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full view >>> -->
+      <div data-ng-if="itemsExpanded" data-ng-init="currentOutExpanded=0; sizeOutExpanded=(from_vout) ? tx.vout.length : 5; fromVoutCollapsed=(from_vout)">
+        <div data-ng-repeat="vout in tx.vout">
+          <div class="panel panel-default transaction-vin-vout" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
+            <div class="panel-body">
+              <div class="pull-right btc-value">
+                <span>{{vout.amount}}
+                </span>
+              </div>
+              <div class="ellipsis">
+                <a href="/address/{{vout.addr}}">{{vout.addr}}</a>
+              </div>
+            </div>
+          </div>
+        </div>>
+      </div>
+    </div>
+  </div>
+</div>
