@@ -18,7 +18,7 @@
         <div class="panel panel-default" data-ng-repeat="vin in tx.vin" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
           <div class="panel-body transaction-vin-vout" data-ng-show="vin.amount">
             <div class="pull-right btc-value">
-              {{vin.amount}}
+              <strong>{{vin.amount}}</strong>
             </div>
             <div class="ellipsis">
               <a href="/address/{{vin.addr}}" >{{vin.addr}}</a>
@@ -33,14 +33,11 @@
           <div class="panel panel-default transaction-vin-vout" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
             <div class="panel-body">
               <div class="pull-right btc-value">
-                {{vin.amount}}
+                <strong>{{vin.amount}}</strong>
               </div>
               <div class="ellipsis">
                 <a class="glyphicon glyphicon-chevron-right" href="/tx/{{vin.txid}}/>/{{vin.vout}}" title="Outpoint: {{vin.txid}},{{vin.vout}}"></a>
                 <a href="/address/{{vin.addr}}" >{{vin.addr}}</a>
-              </div>
-              <div class="pull-right btc-value" ng-show="vin.hasAssets">
-                {{vin.amount}}               
               </div>
             </div> <!-- END OF PANEL BODY -->
           </div> <!-- END OF PANEL-DEFAULT -->
@@ -64,18 +61,11 @@
           <div class="transaction-vin-vout panel panel-default" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
             <div class="panel-body">
               <div class="pull-right btc-value" >
-                {{vout.amount }}
+                <strong>{{vout.amount }}</strong>
               </div>
 
               <div class="ellipsis">
                 <a href="/address/{{vout.addr}}" >{{vout.addr}}</a>
-              </div>
-
-              <div ng-show="vout.hasAssets" style="margin-top: 10px">
-                <span stlye="font-size: 20px">Output contains Following DigiAssets</span>
-              </div>
-              <div class="pull-right btc-value" ng-show="vout.hasAssets">
-                {{vout.amount }}               
               </div>
             </div>
           </div>
@@ -88,7 +78,7 @@
           <div class="panel panel-default transaction-vin-vout" style="margin-top: 0; margin-bottom: 2px; border: none !important;">
             <div class="panel-body">
               <div class="pull-right btc-value">
-                <span>{{vout.amount}}
+                <span><strong>{{vout.amount}}</strong>
                 </span>
               </div>
               <div class="ellipsis">
@@ -96,8 +86,26 @@
               </div>
             </div>
           </div>
-        </div>>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
+<div class="well well-sm bgwhite ellipsis" data-ng-if="tx.blockhash">
+  <strong translate>Included in Block</strong> <a class="text-muted" href="/block/{{tx.blockhash}}">{{tx.blockhash}}</a>
+  <span class="btn-copy" clip-copy="tx.blockhash"></span>
+</div>
+
+<div class="line-top row" data-ng-hide="!tx">
+  <div class="col-xs-6 col-sm-4 col-md-4">
+    <span data-ng-show="!tx.isCoinBase &&  !isNaN(parseFloat(tx.fee))"
+      class="txvalues txvalues-default"><span translate>Fee</span>: {{$root.currency.getConvertion(tx.fee) || tx.fee + 'DGB'}} </span>
+  </div>
+  <div class="col-xs-6 col-sm-8 col-md-8 text-right">
+    <span data-ng-show="tx.confirmations" class="txvalues
+      txvalues-success">{{tx.confirmations}} <span translate>Confirmations</span></span>
+    <span data-ng-show="!tx.confirmations" class="txvalues txvalues-danger" translate>Unconfirmed Transaction!</span>
+    <span class="txvalues txvalues-primary">{{$root.currency.getConvertion(tx.valueOut) || tx.valueOut + ' DGB' }}</span>
   </div>
 </div>

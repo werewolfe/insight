@@ -2,10 +2,10 @@
   "name": "insight-bitcore",
   "description": "An open-source frontend for the Insight API. The Insight API provides you with a convenient, powerful and simple way to query and broadcast data on the digibyte network and build your own services with it.",
   "version": "0.2.5",
-    "engines": {
-      "node": "0.10.36",
-      "npm": "2.12.x"
-    },
+  "engines": {
+    "node": "0.10.36",
+    "npm": "2.12.x"
+  },
   "author": {
     "name": "DigiByte Team",
     "email": "info@digibyte.io"

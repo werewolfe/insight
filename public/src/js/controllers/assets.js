@@ -33,8 +33,17 @@ angular.module('insight.assets').controller('AssetsController',
             };
           });
           $scope.transfers = data.transfers.map(function(tx) {
+            var valueOut = 0;
+            tx.vout.forEach(function(vout) {
+              valueOut += vout.value;
+            });
             return {
+              blockhash: tx.blockhash,
+              blockheight: tx.blockheight,
+              confirmations: tx.confirmations,
+              fee: tx.fee / 100000000,
               txid: tx.txid,
+              valueOut: valueOut / 100000000,
               vin: tx.vin.map(function(vin) {
                 return {
                   addr: vin.previousOutput.addresses.join(','),
@@ -49,7 +58,6 @@ angular.module('insight.assets').controller('AssetsController',
               })
             };
           });
-          console.log($scope.transfers, data);
           assetMetadata.get({ assetId: $routeParams.assetId, txid: $routeParams.txId + ':' + $routeParams.index }, function(metadata) {
             $scope.issueAddress = metadata.issueAddress;
             $scope.metadata = metadata.metadataOfIssuence.data;
@@ -82,7 +90,6 @@ angular.module('insight.assets').controller('AssetsController',
     }
 
     $scope.getAssetAmount = function(asset) {
-      //console.log(asset);
       if(!asset || !asset.length) {
         return 0;
       }
